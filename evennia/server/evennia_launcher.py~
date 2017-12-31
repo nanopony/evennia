@@ -21,9 +21,9 @@ from distutils.version import LooseVersion
 from argparse import ArgumentParser
 from subprocess import Popen, check_output, call, CalledProcessError, STDOUT
 import django
-import zope
+
 # Signal processing
-SIG = signal.SIGKILL
+SIG = signal.SIGINT
 CTRL_C_EVENT = 0  # Windows SIGINT-like signal
 
 # Set up the main python paths to Evennia
@@ -67,8 +67,7 @@ TWISTED_MIN = '16.0.0'
 DJANGO_MIN = '1.11'
 DJANGO_REC = '1.11'
 
-
-sys.path.insert(1, EVENNIA_ROOT)
+sys.path[1] = EVENNIA_ROOT
 
 #------------------------------------------------------------
 #
@@ -746,7 +745,6 @@ def kill(pidfile, killsignal=SIG, succmsg="", errmsg="",
             print("Process %(pid)s cannot be stopped. "
                   "The PID file 'server/%(pidfile)s' seems stale. "
                   "Try removing it." % {'pid': pid, 'pidfile': pidfile})
-            os.unlink(pidfile)
             return
         print("Evennia:", succmsg)
         return

@@ -22,7 +22,6 @@ from subprocess import Popen
 import Queue
 import thread
 import evennia
-
 try:
     # check if launched with pypy
     import __pypy__ as is_pypy
